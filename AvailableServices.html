@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Rabbit - Home</title>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      /* Subtle gradient background */
+      background: linear-gradient(125deg, #f0f4f8, #ffffff 70%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .home-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 50px auto;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 16px;
+      color: #ffffff;
+      background: linear-gradient(145deg, #86C232, #61892F);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+      transition: all 0.4s ease;
+      position: relative;
+      backdrop-filter: blur(4px);
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .home-button:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 18px #86C232cc;
+      background: linear-gradient(145deg, #729c2e, #4f7d24);
+    }
+
+    .home-button img {
+      width: 20px;
+      height: 20px;
+      filter: drop-shadow(0 0 2px #fff);
+      transition: transform 0.4s ease;
+    }
+
+    .home-button:hover img {
+      transform: rotate(-10deg) scale(1.15);
+    }
+
+    .cart {
+      position: relative;
+      display: inline-block;
+    }
+
+    .cart img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -10px;
+      background-color: #86C232;
+      color: #1B1521;
+      font-size: 13px;
+      padding: 2px 6px;
+      border-radius: 50%;
+      font-weight: bold;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+
+    .gallery div {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 12px;
+      margin: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+      width: 200px;
+      height: 270px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeInUp 0.6s ease-in-out both;
+    }
+
+    .gallery div:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .gallery button {
+      margin-top: 10px;
+      background-color: #86C232;
+      color: #1B1521;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .gallery button:hover {
+      background-color: #7ac228;
+      transform: scale(1.08);
+      box-shadow: 0 0 12px #86C232cc;
+    }
+
+    .slider {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      margin: 40px auto 20px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .slider img {
+      width: 100%;
+      display: none;
+      border-radius: 20px;
+      width: 600px;
+      height: 320px;
+    }
+
+    img.displaySlide {
+      display: block;
+      animation: fade 1.5s ease-in-out;
+    }
+
+    .slider button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      padding: 10px 15px;
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 8px;
+    }
+
+    .slider button:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0.6;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .blink {
+      animation: blink 0.6s infinite alternate;
+      color: #f8fafc;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    @keyframes blink {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .scroll-text {
+      white-space: nowrap;
+      overflow: hidden;
+      display: block;
+      width: 32%;
+      background-color: #86C232;
+      padding: 10px 0;
+      animation: scroll 50s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+  <nav class="flex justify-end items-center px-6 py-3 bg-[#1B1521] shadow-md sticky top-0 z-50">
+    <a href="cart.html" class="cart">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/shopping-cart.png" alt="Cart">
+      <span id="cartCount" class="cart-count">0</span>
+    </a>
+  </nav>
+
+  <div class="scroll-text">
+    <span class="blink">
+      <marquee>For First Booking 40% OFF</marquee>
+    </span>
+  </div>
+
+  <div class="slider my-6">
+    <div class="slides">
+      <img class="slide" src="images/CaretakingServices.jpg" alt="car-IMG">
+      <img class="slide" src="images/CleaningServices.jpg" alt="car-IMG">
+      <img class="slide" src="images/ElectricianServices.jpg" alt="car-IMG">
+      <img class="slide" src="images/FridgeRepairServices.jpg" alt="car-IMG">
+      <img class="slide" src="images/ManicureServices.jpg" alt="car-IMG">
+      <img class="slide" src="images/plumbingServices.jpg" alt="car-IMG">
+      <img class="slide" src="images/SaloonServices.jpg" alt="car-IMG">
+      <img class="slide" src="images/SpaServices.jpg" alt="car-IMG">
+      <img class="slide" src="images/SecurityServices.jpg" alt="car-IMG">
+    </div>
+    <button class="prev" onclick="prevSlide()">&#10094;</button>
+    <button class="next" onclick="nextSlide()">&#10095;</button>
+  </div>
+
+  <h1
+    class="text-3xl font-extrabold my-6 bg-white bg-opacity-30 backdrop-blur-xl px-6 py-2 rounded-xl inline-block animate-pulse shadow-lg">
+    ✨ Task Rabbit – All You Need in One Place ✨
+  </h1>
+
+  <hr class="w-1/2 mx-auto my-10 border-t-4 border-green-400 rounded-full animate-pulse">
+
+  <!-- Modern Styled Filter Buttons -->
+  <div class="my-10 flex justify-center gap-6 flex-wrap">
+    <button onclick="showAll()"
+      class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full shadow-lg font-semibold transition-all duration-300 flex items-center gap-2">
+      All Services
+    </button>
+
+    <button onclick="filterElectrical()"
+      class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg font-semibold transition-all duration-300 flex items-center gap-2">
+      <img src="https://img.icons8.com/fluency/32/electrical.png" alt="electrical" class="w-6 h-6">
+      Electrical Appliance Services
+    </button>
+  </div>
+
+  <div class="gallery" id="serviceGallery">
+
+  </div>
+
+  <a href="login_page.html" class="home-button">
+    <img src="https://img.icons8.com/ios-filled/24/ffffff/home.png" alt="Home Icon" />
+    Back to Home
+  </a>
+
+  <script>
+    const allImages = [
+      { src: "images/CaretakingServices.jpg", link: "services/caretaking.html", name: "Caretaking Services" },
+      { src: "images/CleaningServices.jpg", link: "services/cleaning.html", name: "Cleaning Services" },
+      { src: "images/ElectricianServices.jpg", link: "services/electrician.html", name: "Electrician Services" },
+      { src: "images/ManicureServices.jpg", link: "services/manicureservices.html", name: "Manicure Services" },
+      { src: "images/paintingService.webp", link: "services/paintingfile.html", name: "Painting Services" },
+      { src: "images/plumbingServices.jpg", link: "services/plumbingservice.html", name: "Plumbing Services" },
+      { src: "images/SaloonServices.jpg", link: "services/saloonServices.html", name: "Saloon Services" },
+      { src: "images/SecurityServices.jpg", link: "services/Securityservices.html", name: "Security Services" },
+      { src: "images/SpaServices.jpg", link: "services/spa.html", name: "Spa Services" }
+    ];
+
+    const electricalImages = [
+      { src: "images/FridgeRepairServices.jpg", link: "services/fridge.html", name: "Fridge Services" },
+      { src: "images/Electronic items services/TvService.jpg", link: "services/tv.html", name: "TV Services" },
+      { src: "images/Electronic items services/Washingmachineservices.jpg", link: "services/washingmachine.html", name: "Washing Machine Services" },
+      { src: "images/Electronic items services/waterpurifierservices.jpg", link: "services/waterpurifier.html", name: "Water Purifier Services" }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderGallery(images) {
+      const gallery = document.getElementById('serviceGallery');
+      gallery.innerHTML = '';
+
+      images.forEach(img => {
+        const container = document.createElement('div');
+        const a = document.createElement('a');
+        a.href = img.link;
+        a.target = "_blank";
+        const image = document.createElement('img');
+        image.src = img.src;
+        image.alt = img.name;
+        a.appendChild(image);
+        container.appendChild(a);
+
+        const badge = document.createElement('div');
+        badge.textContent = img.name.split(" ")[0];
+        badge.style.cssText = `
+          background: linear-gradient(135deg, #86C232, #a0da57);
+          color: #1B1521;
+          padding: 4px 8px;
+          font-size: 12px;
+          font-weight: bold;
+          border-radius: 8px;
+          margin-top: 4px;
+          text-transform: uppercase;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        `;
+        container.appendChild(badge);
+
+        const addButton = document.createElement('button');
+        addButton.textContent = "Add to Cart";
+        addButton.onclick = () => addToCart(img);
+        container.appendChild(addButton);
+
+        gallery.appendChild(container);
+      });
+    }
+
+    function addToCart(item) {
+      cart.push(item);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartCount = document.getElementById('cartCount');
+      cartCount.textContent = cart.length;
+    }
+
+    function filterElectrical() {
+      renderGallery(electricalImages);
+    }
+
+    function showAll() {
+      renderGallery(allImages);
+    }
+
+    window.onload = () => {
+      showAll();
+      updateCart();
+    };
+
+    const slides = document.querySelectorAll(".slides img");
+    let slideIndex = 0;
+    let intervalId = null;
+
+    document.addEventListener("DOMContentLoaded", initializeSlider);
+
+    function initializeSlider() {
+      slides[slideIndex].classList.add("displaySlide");
+      intervalId = setInterval(nextSlide, 5000);
+    }
+
+    function showSlide(index) {
+      if (index > slides.length - 1) {
+        slideIndex = 0;
+      } else if (slideIndex < 0) {
+        slideIndex = slides.length - 1;
+      }
+
+      slides.forEach(slide => {
+        slide.classList.remove("displaySlide");
+      });
+      slides[slideIndex].classList.add("displaySlide");
+    }
+
+    function prevSlide() {
+      clearInterval(intervalId);
+      slideIndex--;
+      showSlide(slideIndex);
+    }
+
+    function nextSlide() {
+      slideIndex++;
+      showSlide(slideIndex);
+    }
+  </script>
+
+</body>
+
+</html>

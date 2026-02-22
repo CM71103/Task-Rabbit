@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caretaking QA Dashboard - Service Provider</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpg" href="taskrabbit.jpg" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(270deg, #c2e9fb, #a1c4fd, #d4fc79, #96e6a1);
+      background-size: 800% 800%;
+      animation: gradientBG 20s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .overlay {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.75);
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: scale(1.01);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1a1a2e;
+      margin-bottom: 40px;
+      font-size: 28px;
+    }
+
+    label {
+      font-weight: 500;
+      margin-top: 12px;
+      display: block;
+      color: #333;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin-top: 6px;
+      margin-bottom: 22px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      background: #f0f4f8;
+      font-size: 15px;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #007BFF;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+      outline: none;
+    }
+
+    button {
+      background: linear-gradient(135deg, #007BFF, #0056b3);
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: block;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #0056b3, #003a75);
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(0, 91, 187, 0.4);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    th, td {
+      padding: 16px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #007BFF;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f4f9ff;
+    }
+
+    tr:hover {
+      background-color: #e6f2ff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    canvas {
+      margin-top: 40px;
+    }
+
+    .home-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      box-shadow: 0 8px 16px rgba(0, 114, 255, 0.4);
+      transition: transform 0.3s ease, background 0.3s ease;
+      z-index: 999;
+    }
+
+    .home-btn:hover {
+      background: linear-gradient(135deg, #0072ff, #004d99);
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>Service Provider QA Dashboard - Caretaking</h1>
+      <form id="qaForm">
+        <label for="caretakerName">Caretaker Full Name:</label>
+        <input type="text" id="caretakerName" name="caretakerName" placeholder="e.g., John Doe" required />
+
+        <label for="caretakerId">Caretaker ID:</label>
+        <input type="text" id="caretakerId" name="caretakerId" placeholder="e.g., CTK-2025-001" required />
+
+        <label for="shift">Shift Timing:</label>
+        <select id="shift" name="shift">
+          <option value="">Select Shift</option>
+          <option value="Morning">Morning</option>
+          <option value="Afternoon">Afternoon</option>
+          <option value="Night">Night</option>
+        </select>
+
+        <label for="assignedArea">Assigned Location/Area:</label>
+        <input type="text" id="assignedArea" name="assignedArea" placeholder="e.g., Block A, Room 105" required />
+
+        <label for="services">Services Provided Today:</label>
+        <textarea id="services" name="services" rows="3" placeholder="E.g., Feeding, Bathing, Cleaning, Medical Monitoring"></textarea>
+
+        <label for="clientStatus">Client Health Status:</label>
+        <select id="clientStatus" name="clientStatus">
+          <option value="Stable">Stable</option>
+          <option value="Needs Attention">Needs Attention</option>
+          <option value="Critical">Critical</option>
+        </select>
+
+        <label for="incidentReport">Incident Report (if any):</label>
+        <textarea id="incidentReport" name="incidentReport" rows="2" placeholder="Report any unusual activity or issues faced."></textarea>
+
+        <label for="supervisorScore">Supervisor QA Score (0 - 10):</label>
+        <input type="number" id="supervisorScore" name="supervisorScore" min="0" max="10" />
+
+        <label for="comments">Supervisor Comments:</label>
+        <textarea id="comments" name="comments" rows="3"></textarea>
+
+        <button type="submit">Submit QA Report</button>
+      </form>
+
+      <table id="qaTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Shift</th>
+            <th>Location</th>
+            <th>Services</th>
+            <th>Status</th>
+            <th>Incident</th>
+            <th>Score</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h2 style="margin-top: 50px;">Analytics</h2>
+      <canvas id="scoreChart" height="100"></canvas>
+      <canvas id="statusChart" height="100"></canvas>
+    </div>
+  </div>
+
+
+  <a href="login_page.html" class="home-btn">🏠 Back to Home</a>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const form = document.getElementById('qaForm');
+    const tableBody = document.querySelector('#qaTable tbody');
+
+    // To store all submitted QA scores
+    const scoreData = [];
+    const statusData = { Stable: 0, 'Needs Attention': 0, Critical: 0 };
+
+    const scoreChartCtx = document.getElementById('scoreChart').getContext('2d');
+    const statusChartCtx = document.getElementById('statusChart').getContext('2d');
+
+    const scoreChart = new Chart(scoreChartCtx, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'QA Score',
+          data: [],
+          backgroundColor: '#007BFF'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 10
+          }
+        }
+      }
+    });
+
+    const statusChart = new Chart(statusChartCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Stable', 'Needs Attention', 'Critical'],
+        datasets: [{
+          label: 'Client Status',
+          data: [0, 0, 0],
+          backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const caretakerName = form.caretakerName.value;
+      const caretakerId = form.caretakerId.value;
+      const shift = form.shift.value;
+      const assignedArea = form.assignedArea.value;
+      const services = form.services.value;
+      const clientStatus = form.clientStatus.value;
+      const incidentReport = form.incidentReport.value;
+      const supervisorScore = form.supervisorScore.value;
+      const comments = form.comments.value;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${caretakerName}</td>
+        <td>${caretakerId}</td>
+        <td>${shift}</td>
+        <td>${assignedArea}</td>
+        <td>${services}</td>
+        <td>${clientStatus}</td>
+        <td>${incidentReport}</td>
+        <td>${supervisorScore}</td>
+        <td>${comments}</td>
+      `;
+      tableBody.appendChild(row);
+
+      scoreChart.data.labels.push(caretakerName);
+      scoreChart.data.datasets[0].data.push(Number(supervisorScore));
+      scoreChart.update();
+
+      if (statusData[clientStatus] !== undefined) {
+        statusData[clientStatus]++;
+        statusChart.data.datasets[0].data = Object.values(statusData);
+        statusChart.update();
+      }
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Services Wizard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #f0f4f8, #ffffff);
+      padding: 20px;
+      text-align: center;
+      color: #1B1521;
+    }
+    .wizard-container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="text-3xl font-bold mb-6">Service Booking Wizard</h1>
+
+  <div id="wizard" class="wizard-container">
+    <h2 id="formTitle" class="text-xl font-semibold mb-2"></h2>
+    <iframe id="formFrame"></iframe>
+
+    <div class="flex justify-between mt-4">
+      <button onclick="prevForm()" class="bg-gray-500 text-white px-4 py-2 rounded" id="prevBtn" disabled>Previous</button>
+      <button onclick="nextForm()" class="bg-green-600 text-white px-4 py-2 rounded">Next</button>
+    </div>
+  </div>
+
+  <div id="billSummary" class="wizard-container mt-10" style="display: none;"></div>
+
+  <script>
+    // ✅ Service form mappings (local relative paths)
+    const serviceForms = {
+      caretaking: "services/caretaking.html",
+      paintingfile: "services/paintingfile.html",
+      cleaning: "services/cleaning.html",
+      plumbingservice: "services/plumbingservice.html",
+      electrican: "services/electrican.html",
+      saloonservices: "services/saloonservices.html",
+      fridge: "services/fridge.html",
+      spa: "services/spa.html",
+      hardware: "services/hardware.html",
+      manicureservices: "services/manicureservices.html",
+      securityservices: "services/securityservices.html",
+      tv: "services/tv.html",
+      washingmachhine: "services/washingmachhine.html",
+      waterpurifier: "services/waterpurifier.html",
+    };
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const wizardSteps = cart.map(item => {
+      const key = item.name.toLowerCase().replace(/\s/g, '');
+      return {
+        name: item.name,
+        price: item.price || 50, // fallback if no message received
+        file: serviceForms[key]
+      };
+    }).filter(step => step.file);
+
+    let currentStep = 0;
+
+    function loadForm(stepIndex) {
+      const step = wizardSteps[stepIndex];
+      document.getElementById('formTitle').textContent = `Step ${stepIndex + 1}: ${step.name}`;
+      document.getElementById('formFrame').src = step.file;
+      document.getElementById('prevBtn').disabled = stepIndex === 0;
+    }
+
+    function nextForm() {
+      if (currentStep < wizardSteps.length - 1) {
+        currentStep++;
+        loadForm(currentStep);
+      } else {
+        generateBill();
+      }
+    }
+
+    function prevForm() {
+      if (currentStep > 0) {
+        currentStep--;
+        loadForm(currentStep);
+      }
+    }
+
+    // ✅ Receive pricing updates from child iframes
+    window.addEventListener('message', (event) => {
+      if (event.data && typeof event.data.price === 'number') {
+        wizardSteps[currentStep].price = Number(event.data.price);
+        console.log(`✅ Received price from form: ₹${event.data.price} for ${wizardSteps[currentStep].name}`);
+      }
+    });
+
+    function generateBill() {
+      const total = wizardSteps.reduce((sum, step) => sum + step.price, 0);
+      const discount = wizardSteps.length >= 2 ? total * 0.10 : 0;
+      const finalTotal = total - discount;
+
+      const summary = `
+        <h2 class="text-xl font-bold mb-4">Final Bill</h2>
+        <ul class="text-left mb-4">
+          ${wizardSteps.map(step => `<li>• ${step.name}: ₹${step.price}</li>`).join('')}
+        </ul>
+        <p><strong>Total:</strong> ₹${total.toFixed(2)}</p>
+        ${discount > 0 ? `<p><strong>Discount (10%):</strong> -₹${discount.toFixed(2)}</p>` : ''}
+        <p><strong>Amount Payable:</strong> ₹${finalTotal.toFixed(2)}</p>
+      `;
+
+      document.getElementById('wizard').style.display = 'none';
+      document.getElementById('billSummary').innerHTML = summary;
+      document.getElementById('billSummary').style.display = 'block';
+    }
+
+    if (wizardSteps.length > 0) {
+      loadForm(currentStep);
+    } else {
+      document.getElementById('wizard').innerHTML = "<p>No matching forms found for items in cart.</p>";
+    }
+  </script>
+
+</body>
+</html>

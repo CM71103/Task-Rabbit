@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Sign Up</title>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .signup-container {
+      background: #f9fafb;
+      padding: 35px 30px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    h1 {
+      color: #16a34a;
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .input-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      color: #1f2937;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      outline: none;
+      background-color: #ffffff;
+      color: #111827;
+      font-size: 14px;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25);
+    }
+
+    input::placeholder {
+      color: #9ca3af;
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .signup-btn {
+      background: linear-gradient(to right, #16a34a, #65a30d);
+      color: white;
+      border: none;
+      padding: 13px;
+      width: 100%;
+      font-size: 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .signup-btn:hover {
+      background: #22c55e;
+      transform: scale(1.03);
+    }
+
+    .social-login {
+      margin-top: 18px;
+    }
+
+    .social-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .google-btn {
+      background-color: #DB4437;
+    }
+
+    .facebook-btn {
+      background-color: #4267B2;
+    }
+
+    .social-btn:hover {
+      transform: scale(1.03);
+      opacity: 0.9;
+    }
+
+    .option-btn {
+      margin-top: 20px;
+      text-decoration: underline;
+      font-size: 13px;
+      color: #16a34a;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .option-btn:hover {
+      color: #4ade80;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h1>Customer Sign-Up</h1>
+
+    <form id="signup-form">
+      <div class="input-group">
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" placeholder="Enter your first name">
+        <p class="error" id="fname-error">First name is required</p>
+      </div>
+
+      <div class="input-group">
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" placeholder="Enter your last name">
+        <p class="error" id="lname-error">Last name is required</p>
+      </div>
+
+      <div class="input-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob">
+        <p class="error" id="dob-error">Date of birth is required</p>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+        <p class="error" id="email-error">Valid email is required</p>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+        <p class="error" id="password-error">Password must be at least 6 characters</p>
+      </div>
+
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+
+    <div class="social-login">
+      <button class="social-btn google-btn" onclick="back()">Sign Up with Google</button>
+      <button class="social-btn facebook-btn" onclick="back()">Sign Up with Facebook</button>
+    </div>
+
+    <button class="option-btn" onclick="redirectToCustomerLogin()">Already have an account? Log in</button>
+  </div>
+
+  <script>
+    document.getElementById("signup-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let isValid = true;
+
+      let firstName = document.getElementById("firstname").value.trim();
+      let lastName = document.getElementById("lastname").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
+      let dob = document.getElementById("dob").value;
+
+      document.getElementById("fname-error").style.display = firstName ? "none" : "block";
+      document.getElementById("lname-error").style.display = lastName ? "none" : "block";
+      document.getElementById("email-error").style.display = email.includes("@") ? "none" : "block";
+      document.getElementById("password-error").style.display = password.length >= 6 ? "none" : "block";
+      document.getElementById("dob-error").style.display = dob ? "none" : "block";
+
+      if (!firstName || !lastName || !email.includes("@") || password.length < 6 || !dob) {
+        isValid = false;
+      }
+
+      const users = JSON.parse(localStorage.getItem("customer_users")) || [];
+      const emailExists = users.some(user => user.email === email);
+
+      if (emailExists) {
+        alert("Email is already registered. Please use another one.");
+        return;
+      }
+
+      if (isValid) {
+        const customer = { firstName, lastName, email, password, dob };
+        users.push(customer);
+        localStorage.setItem("customer_users", JSON.stringify(users));
+        alert("Sign-Up Successful!");
+        window.location.href = "customer-login.html";
+      }
+    });
+
+    function back() {
+      alert("Social login coming soon.");
+    }
+
+    function redirectToCustomerLogin() {
+      window.location.href = "customer-login.html";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Provider Login</title>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #1f2937;
+    }
+
+    .login-container {
+      background: #f9fafb;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #16a34a;
+      margin-bottom: 24px;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      outline: none;
+      font-size: 15px;
+      background: #ffffff;
+      color: #1f2937;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+    }
+
+    .login-btn {
+      background: linear-gradient(to right, #16a34a, #65a30d);
+      color: white;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .login-btn:hover {
+      background: #15803d;
+      transform: scale(1.03);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .forgot {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #16a34a;
+      cursor: pointer;
+    }
+
+    .forgot:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>Service Provider Login</h1>
+    <form id="login-form">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+        <p class="error" id="email-error">Email is required</p>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+        <p class="error" id="password-error">Password is required</p>
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+      <p class="forgot" onclick="showPassword()">Forgot Password?</p>
+    </form>
+  </div>
+
+  <script>
+    function showPassword() {
+      const storedUser = JSON.parse(localStorage.getItem("ut_user"));
+      if (storedUser) {
+        alert(`Hint: Your password is your registered phone number.\nPassword: ${storedUser.password}`);
+      } else {
+        alert("No registered service provider found.");
+      }
+    }
+
+    document.getElementById("login-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      document.getElementById("email-error").style.display = email ? "none" : "block";
+      document.getElementById("password-error").style.display = password ? "none" : "block";
+
+      if (!email || !password) return;
+
+      const storedUser = JSON.parse(localStorage.getItem("ut_user"));
+
+      if (!storedUser) {
+        alert("No user found. Please sign up first.");
+        return;
+      }
+
+      if (storedUser.email === email && storedUser.password === password) {
+        localStorage.setItem("isLoggedIn", "true");
+        alert("Login successful!");
+        window.location.href = "Caretakingsc.html";
+      } else {
+        alert("Incorrect email or password.");
+      }
+    });
+  </script>
+
+</body>
+</html>

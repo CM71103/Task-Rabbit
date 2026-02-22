@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f9fafb;
+      background-image: none;
+      color: #1f2937;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: #ffffff;
+      backdrop-filter: none;
+      padding: 50px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 460px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #16a34a;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .option-btn {
+      padding: 14px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-btn {
+      background: linear-gradient(to right, #6A4FB6, #4F3A84);
+    }
+
+    .customer-btn {
+      background: linear-gradient(to right, #86C232, #65a30d);
+    }
+
+    .option-btn:hover {
+      transform: scale(1.03);
+      opacity: 0.95;
+    }
+
+    .home-link {
+      display: block;
+      margin-top: 25px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #6b7280;
+      transition: all 0.3s ease;
+    }
+
+    .home-link:hover {
+      color: #16a34a;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Select Login Type</h1>
+    <div class="options">
+      <button class="option-btn service-btn" onclick="redirectToServiceProvider()">Service Provider Sign-Up</button>
+      <button class="option-btn customer-btn" onclick="redirectToCustomer()">Customer Sign-Up</button>
+    </div>
+    <a class="home-link" href="login_page.html">← Back to Home</a>
+  </div>
+
+  <script>
+    function redirectToServiceProvider() {
+      window.location.href = 'serviceprovider_signup.html';
+    }
+
+    function redirectToCustomer() {
+      window.location.href = 'signup.html';
+    }
+  </script>
+</body>
+</html>

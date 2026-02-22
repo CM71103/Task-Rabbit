@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Rabbit - Home</title>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    .hero-video {
+      object-fit: cover;
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .hero-overlay {
+      background-color: rgba(0,0,0,0.6);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body class="text-gray-800">
+
+
+  <section class="bg-gray-100 py-12 mt-28">
+  <div class="container mx-auto px-6 text-center">
+    <!-- SVG Logo -->
+    <div class="mx-auto w-24 h-24 mb-4">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="topArc" d="M 35,100 A 65,65 0 0,1 165,100" fill="none" />
+          <path id="bottomArc" d="M 165,100 A 65,65 0 0,1 35,100" fill="none" />
+        </defs>
+        <circle cx="100" cy="100" r="90" stroke="#1a3c34" stroke-width="5" fill="none" />
+        <circle cx="100" cy="100" r="50" stroke="#1a3c34" stroke-width="3" fill="none" />
+        <text x="100" y="115" text-anchor="middle" font-size="35" font-weight="bold" font-family="Arial" fill="#1a3c34">TR</text>
+        <text font-size="10" font-weight="bold" font-family="Arial" fill="#1a3c34">
+          <textPath href="#topArc" startOffset="50%" text-anchor="middle">TASK RABBIT</textPath>
+        </text>
+        <text font-size="9" font-family="Arial" fill="#1a3c34">
+          <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">The handyman you can trust</textPath>
+        </text>
+        <circle cx="25" cy="100" r="3" fill="#1a3c34" />
+        <circle cx="175" cy="100" r="3" fill="#1a3c34" />
+      </svg>
+    </div>
+    <!-- Title & Subtitle -->
+    <h2 class="text-2xl font-bold text-gray-800">We Take Pride in Our Brand</h2>
+    <p class="text-gray-600 mt-2">Built on trust, reliability, and professionalism</p>
+  </div>
+</section>
+
+  
+
+  <header class="absolute top-0 left-0 w-full py-6 z-10 bg-black/70 backdrop-blur-md">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <h1 class="text-3xl text-green-500 font-bold">Task Rabbit</h1>
+      <nav class="hidden md:flex space-x-8">
+        <a href="login_page.html" class="text-white hover:text-green-300">Home</a>
+        <a href="about.html" class="text-white hover:text-green-300">About</a>
+        <a href="contact.html" class="text-white hover:text-green-300">Contact</a>
+      </nav>
+      <button onclick="location.href='customer_servicepro.html'" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2 rounded-full transition">Sign Up</button>
+    </div>
+  </header>
+  <br>
+
+  <section class="relative">
+    <video class="hero-video" autoplay muted loop>
+      <source src="vecteezy_coffee-shop-owner-a-warm-smile-and-confident-gaze-this_55346338.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay text-center text-white">
+      <h2 class="text-6xl font-bold mb-4">Connecting You with Trusted Professionals</h2>
+      <p class="text-xl mb-8">Reliable services, right when you need them</p>
+      <a href="AvailableServices.html" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition">Get Started</a>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <h3 class="text-4xl font-bold text-center mb-12">Why Choose Us?</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow hover:shadow-2xl transition transform hover:-translate-y-2">
+          <h4 class="text-xl font-bold text-green-500 mb-3">Secure Transactions</h4>
+          <p>Ensuring safe and transparent transactions every time.</p>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow hover:shadow-2xl transition transform hover:-translate-y-2">
+          <h4 class="text-xl font-bold text-green-500 mb-3">Fast Response</h4>
+          <p>Instant responses and quick solutions from verified experts.</p>
+        </div>
+        <div class="bg-white p-8 rounded-xl shadow hover:shadow-2xl transition transform hover:-translate-y-2">
+          <h4 class="text-xl font-bold text-green-500 mb-3">Customer Satisfaction</h4>
+          <p>Our top priority is making sure you're always satisfied.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New image section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl text-center font-bold mb-6">Our Commitment</h2>
+      <p class="text-center text-lg text-gray-600 mb-10">Experience the difference with top-notch service and unwavering dedication.</p>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+        <!-- promise image -->
+        <div class="w-full md:w-1/2">
+          <img src="promise.png" alt="Our Promise" class="object-cover rounded-xl shadow-lg">
+        </div>
+        <!-- whyyouchooseus image -->
+        <div class="w-full md:w-1/2">
+          <img src="whyyouchooseus.png" alt="Why You Choose Us" class="object-cover rounded-xl shadow-lg">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End of new image section -->
+
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div>
+        <h2 class="text-lg font-bold">Task Rabbit</h2>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-4">Company</h3>
+        <ul class="space-y-2">
+          <li><a href="about.html" class="hover:underline">About us</a></li>
+          <li><a href="about.html" class="hover:underline">Terms & conditions</a></li>
+          <li><a href="about.html" class="hover:underline">Privacy policy</a></li>
+          <li><a href="about.html" class="hover:underline">Anti-discrimination policy</a></li>
+          <li><a href="about.html" class="hover:underline">ESG Impact</a></li>
+          <li><a href="customer_servicepro.html" class="hover:underline">Careers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-4">For customers</h3>
+        <ul class="space-y-2">
+          <li><a href="contact.html" class="hover:underline">Task Rabbit</a></li>
+          <li><a href="contact.html" class="hover:underline">Categories near you</a></li>
+          <li><a href="contact.html" class="hover:underline">Blog</a></li>
+          <li><a href="contact.html" class="hover:underline">Contact us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-4">For partners</h3>
+        <a href="#" class="hover:underline">Register as a professional</a>
+        <div class="mt-6 space-x-4">
+          <a href="http://apple.com/in/app-store/"><img src="appstore.png" alt="App Store" class="inline-block" width="25"></a>
+          <a href="https://play.google.com/store/games?hl=en_IN&pli=1"><img src="playstore.png" alt="Google Play" class="inline-block" width="25"></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <p>&copy; 2025 Task Rabbit. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

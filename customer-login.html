@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login</title>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      text-align: center;
+      background-color: #ffffff;
+      color: #1f2937;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+      background-size: auto;
+    }
+
+    .container {
+      margin-top: -80px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #16a34a;
+      margin-bottom: 20px;
+    }
+
+    .login-box {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f9fafb;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      width: 320px;
+      z-index: 1000;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background-color: #ffffff;
+      font-size: 14px;
+      color: #1f2937;
+    }
+
+    button {
+      padding: 12px 20px;
+      cursor: pointer;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn {
+      background: linear-gradient(to right, #16a34a, #65a30d);
+      color: #fff;
+    }
+
+    .signup-btn {
+      background-color: #e2e8f0;
+      color: #111827;
+    }
+
+    .login-btn:hover,
+    .signup-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      opacity: 0.9;
+    }
+
+    .forgot-password {
+      font-size: 13px;
+      color: #2563eb;
+      cursor: pointer;
+      margin-top: 6px;
+      display: inline-block;
+    }
+
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 13px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>User Login</h1>
+    <button class="login-btn" onclick="showLogin()">Login</button>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="hideLogin()"></div>
+
+  <div class="login-box" id="loginBox">
+    <h2 style="color:#111827; margin-bottom:15px;">Login</h2>
+    <input class="input-field" type="text" id="login-email" placeholder="Email" required>
+    <input class="input-field" type="password" id="login-password" placeholder="Password" required>
+    <span class="forgot-password">Forgot Password?</span>
+    <p class="error-message" id="login-error">Invalid email or password. Please try again.</p>
+    <button class="login-btn" onclick="handleLogin()">Login</button>
+    <button class="signup-btn">Login with Google</button>
+    <button class="signup-btn" onclick="hideLogin()">Cancel</button>
+  </div>
+
+  <script>
+    function showLogin() {
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('loginBox').style.display = 'block';
+    }
+
+    function hideLogin() {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('loginBox').style.display = 'none';
+    }
+
+    function handleLogin() {
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value.trim();
+      const users = JSON.parse(localStorage.getItem("customer_users")) || [];
+
+      const userFound = users.find(user => user.email === email && user.password === password);
+
+      if (userFound) {
+        alert(`Welcome back, ${userFound.firstName}!`);
+        window.location.href = "login_page.html";
+      } else {
+        document.getElementById("login-error").style.display = "block";
+      }
+    }
+
+    document.querySelector(".forgot-password").addEventListener("click", function () {
+      const usernameInput = document.getElementById("login-email").value.trim();
+
+      if (!usernameInput) {
+        alert("Please enter your email first.");
+        return;
+      }
+
+      const storedUsers = JSON.parse(localStorage.getItem("customer_users")) || [];
+      const foundUser = storedUsers.find(user => user.email === usernameInput);
+
+      if (foundUser) {
+        alert(`Hi ${foundUser.firstName}, your password is: "${foundUser.password}"`);
+      } else {
+        alert("User not found. Please check your email.");
+      }
+    });
+  </script>
+
+</body>
+
+</html>

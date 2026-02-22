@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Provider Sign-Up</title>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #1f2937;
+    }
+
+    .signup-container {
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+    }
+
+    h1 {
+      color: #16a34a;
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      outline: none;
+      font-size: 15px;
+      background: #f9fafb;
+      color: #1f2937;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+    }
+
+    .signup-btn {
+      background: #16a34a;
+      color: white;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-top: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .signup-btn:hover {
+      background: #15803d;
+      transform: scale(1.03);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 13px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    #other-specialization-group {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h1>Service Provider Sign-Up</h1>
+    <form id="signup-form">
+      <div class="input-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name">
+        <p class="error" id="name-error">Full name is required</p>
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+        <p class="error" id="email-error">Enter a valid email address</p>
+      </div>
+      <div class="input-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter your phone number">
+        <p class="error" id="phone-error">Enter a valid phone number (10 digits)</p>
+      </div>
+      <div class="input-group">
+        <label for="specialization">Specialization</label>
+        <select id="specialization" onchange="toggleOtherInput()">
+          <option value="">Select Specialization</option>
+          <option value="Plumbing">Plumbing</option>
+          <option value="Electrical">Electrical</option>
+          <option value="Cleaning">Cleaning</option>
+          <option value="IT Services">Care Takers</option>
+          <option value="Other">Other</option>
+        </select>
+        <p class="error" id="specialization-error">Specialization is required</p>
+      </div>
+      <div class="input-group" id="other-specialization-group">
+        <input type="text" id="other" placeholder="Enter specialization">
+      </div>
+      <div class="input-group">
+        <label for="working-hours">Working Hours</label>
+        <input type="text" id="working-hours" placeholder="e.g. 9 AM - 5 PM">
+        <p class="error" id="working-hours-error">Enter valid working hours (e.g., 9 AM - 5 PM)</p>
+      </div>
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+  </div>
+
+  <script>
+    function toggleOtherInput() {
+      let specialization = document.getElementById("specialization").value;
+      let otherInputGroup = document.getElementById("other-specialization-group");
+      if (specialization === "Other") {
+        otherInputGroup.style.display = "block";
+      } else {
+        otherInputGroup.style.display = "none";
+        document.getElementById("other").value = "";
+      }
+    }
+
+    document.getElementById("signup-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let isValid = true;
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let phone = document.getElementById("phone").value.trim();
+      let specialization = document.getElementById("specialization").value;
+      let otherSpecialization = document.getElementById("other").value.trim();
+      let workingHours = document.getElementById("working-hours").value.trim();
+      let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      let phoneRegex = /^\d{10}$/;
+      let workingHoursRegex = /^\d{1,2} ?(AM|PM) ?- ?\d{1,2} ?(AM|PM)$/i;
+
+      document.getElementById("name-error").style.display = name ? "none" : "block";
+      document.getElementById("email-error").style.display = emailRegex.test(email) ? "none" : "block";
+      document.getElementById("phone-error").style.display = phoneRegex.test(phone) ? "none" : "block";
+      document.getElementById("specialization-error").style.display = specialization || otherSpecialization ? "none" : "block";
+      document.getElementById("working-hours-error").style.display = workingHoursRegex.test(workingHours) ? "none" : "block";
+
+      if (!name || !emailRegex.test(email) || !phoneRegex.test(phone) || (!specialization && !otherSpecialization) || !workingHoursRegex.test(workingHours)) {
+        isValid = false;
+      }
+
+      if (isValid) {
+        const user = {
+          name,
+          email,
+          username: email,
+          password: phone,
+          specialization: specialization || otherSpecialization,
+          workingHours
+        };
+        localStorage.setItem('ut_user', JSON.stringify(user));
+        alert("Sign-Up Successful! You can now log in.  And Your mobile number is your password");
+        window.location.href = "serviceprovider.html";
+      }
+    });
+  </script>
+</body>
+</html>

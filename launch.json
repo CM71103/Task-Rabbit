@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "electron-app",
+            "version": "1.0.0",
+            "main": "main.js",
+            "scripts": {
+              "start": "electron ."
+            },
+            "author": "",
+            "license": "ISC",
+            "devDependencies": {
+              "electron": "^35.0.3"
+            }
+        }
+    ]
+}

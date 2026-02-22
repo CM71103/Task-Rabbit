@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #f0f4f8, #ffffff);
+      padding: 20px;
+      text-align: center;
+      color: #1B1521;
+    }
+
+    .cart-container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding: 12px 16px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
+  <div class="cart-container" id="cartItems"></div>
+
+  <div class="flex justify-center gap-4 mt-4">
+    <a href="login_page.html" class="bg-gray-700 text-white px-4 py-2 rounded">🏠 Back to Home</a>
+    <a href="AvailableServices.html" class="bg-blue-600 text-white px-4 py-2 rounded">🛠️ Back to Services</a>
+    <button onclick="startWizard()" class="bg-green-600 text-white px-4 py-2 rounded">📋 Book Now</button>
+    <button onclick="showManualPriceInputs()" class="bg-yellow-500 text-white px-4 py-2 rounded">📝 Enter Price
+      Manually</button>
+  </div>
+
+  <!-- Wizard Section -->
+  <div id="wizard" class="cart-container mt-10" style="display:none;">
+    <h2 id="formTitle" class="text-xl font-semibold mb-2"></h2>
+    <iframe id="formFrame"></iframe>
+    <div class="flex justify-between mt-4">
+      <button onclick="prevForm()" class="bg-gray-500 text-white px-4 py-2 rounded" id="prevBtn"
+        disabled>Previous</button>
+      <button onclick="nextForm()" class="bg-green-600 text-white px-4 py-2 rounded">Next</button>
+    </div>
+  </div>
+
+  <!-- Bill Summary -->
+  <div id="billSummary" class="cart-container mt-10" style="display:none;"></div>
+
+  <!-- Added after wizard for manual price entry if needed -->
+  <div id="manualPriceInputSection" class="cart-container mt-10" style="display: none;">
+    <h2 class="text-xl font-semibold mb-4">Enter Cost for Each Service Manually</h2>
+    <form id="manualPriceForm" onsubmit="calculateManualBill(event)">
+      <div id="manualInputs" class="space-y-4 text-left"></div>
+      <button type="submit" class="mt-4 bg-green-600 text-white px-4 py-2 rounded">✅ Generate Manual Bill</button>
+    </form>
+  </div>
+
+  <script>
+    function showManualPriceInputs() {
+      const section = document.getElementById('manualPriceInputSection');
+      const container = document.getElementById('manualInputs');
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        alert('Cart is empty.');
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+      <label class="block text-lg font-medium">${item.name} Price (₹):</label>
+      <input type="number" name="service_price_${index}" data-name="${item.name}" min="0" step="0.0
+      1"
+             class="w-full border rounded px-4 py-2 mt-1" required />
+    `;
+        container.appendChild(div);
+      });
+
+      section.style.display = 'block';
+      document.getElementById('wizard').style.display = 'none';
+      document.getElementById('billSummary').style.display = 'none';
+    }
+
+    function calculateManualBill(e) {
+      e.preventDefault();
+      const inputs = document.querySelectorAll('#manualInputs input');
+      let total = 0;
+      const services = [];
+
+      inputs.forEach(input => {
+        const price = parseFloat(input.value);
+        const name = input.getAttribute('data-name');
+        if (!isNaN(price)) {
+          services.push({ name, price });
+          total += price;
+        }
+      });
+
+      const discount = services.length >= 2 ? total * 0.10 : 0;
+      const finalTotal = total - discount;
+
+      const summary = `
+    <h2 class="text-xl font-bold mb-4">Final Bill (Manual Entry)</h2>
+    <ul class="text-left mb-4">
+      ${services.map(s => `<li>• ${s.name}: ₹${s.price.toFixed(2)}</li>`).join('')}
+    </ul>
+    <p><strong>Total:</strong> ₹${total.toFixed(2)}</p>
+    ${discount > 0 ? `<p><strong>Discount (10%):</strong> -₹${discount.toFixed(2)}</p>` : ''}
+    <p><strong>Amount Payable:</strong> ₹${finalTotal.toFixed(2)}</p>
+  `;
+
+      document.getElementById('manualPriceInputSection').style.display = 'none';
+      document.getElementById('billSummary').innerHTML = summary;
+      document.getElementById('billSummary').style.display = 'block';
+    }
+  </script>
+
+  <script>
+    // Services map
+    const serviceForms = {
+      caretaking: "services/caretaking.html",
+      cleaning: "services/cleaning.html",
+      electrician: "services/electrician.html",
+      fridge: "services/fridge.html",
+      hardware: "services/hardware.html",
+      manicure: "services/manicureservices.html",
+      painting: "services/paintingfile.html",
+      plumbing: "services/plumbingservice.html",
+      saloon: "services/saloonServices.html",
+      security: "services/Securityservices.html",
+      spa: "services/spa.html",
+      tv: "services/tv.html",
+      washingmachine: "services/washingmachine.html",
+      waterpurifier: "services/waterpurifier.html"
+    };
+
+    const nameMap = {
+      "Manicure Services": "manicure",
+      "Electrician Services": "electrician",
+      "Spa Services": "spa",
+      "Painting Services": "painting",
+      "Cleaning Services": "cleaning",
+      "Caretaking Services": "caretaking",
+      "Security Services": "security",
+      "Hardware Services": "hardware",
+      "Saloon Services": "saloon",
+      "Plumbing Services": "plumbing",
+      "Fridge Services": "fridge",
+      "Washing Machine Services": "washingmachine",
+      "Water Purifier Services": "waterpurifier",
+      "TV Services": "tv"
+    };
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsDiv = document.getElementById('cartItems');
+
+    function renderCart() {
+      cartItemsDiv.innerHTML = '';
+      cart.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = "cart-item";
+        div.innerHTML = `
+      <span><strong>${item.name}</strong></span>
+      <button onclick="removeFromCart(${index})" class="bg-red-500 text-white px-2 py-1 rounded">Remove</button>
+    `;
+        cartItemsDiv.appendChild(div);
+      });
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    let wizardSteps = [];
+    let currentStep = 0;
+
+    function startWizard() {
+      if (cart.length === 0) {
+        alert("Cart is empty.");
+        return;
+      }
+
+      wizardSteps = cart.map(item => {
+        const key = nameMap[item.name.trim()];
+        return {
+          name: item.name,
+          price: 0,
+          file: serviceForms[key]
+        };
+      }).filter(step => step.file);
+
+      if (wizardSteps.length === 0) {
+        alert("No matching forms found for items in cart.");
+        return;
+      }
+
+      currentStep = 0;
+      document.getElementById('wizard').style.display = 'block';
+      document.getElementById('billSummary').style.display = 'none';
+      loadForm(currentStep);
+    }
+
+    function loadForm(stepIndex) {
+      const step = wizardSteps[stepIndex];
+      document.getElementById('formTitle').textContent = `Step ${stepIndex + 1}: ${step.name}`;
+      document.getElementById('formFrame').src = step.file;
+      document.getElementById('prevBtn').disabled = stepIndex === 0;
+    }
+
+    function nextForm() {
+      const iframe = document.getElementById("formFrame");
+
+      try {
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const allText = iframeDoc.body.textContent;
+        const match = allText.match(/Total:\s*[$₹]?(\d+(\.\d+)?)/i);
+        const price = match ? parseFloat(match[1]) : 0;
+        wizardSteps[currentStep].price = price;
+        console.log(`✅ Fetched price from form text: ₹${price}`);
+      } catch (err) {
+        console.error("❌ Could not access iframe content. Setting ₹0.", err);
+        wizardSteps[currentStep].price = 0;
+      }
+
+      if (currentStep < wizardSteps.length - 1) {
+        currentStep++;
+        loadForm(currentStep);
+      } else {
+        generateBill();
+      }
+    }
+
+    function prevForm() {
+      if (currentStep > 0) {
+        currentStep--;
+        loadForm(currentStep);
+      }
+    }
+
+    function generateBill() {
+      const total = wizardSteps.reduce((sum, step) => sum + step.price, 0);
+      const discount = wizardSteps.length >= 2 ? total * 0.10 : 0;
+      const finalTotal = total - discount;
+
+      const summary = `
+    <h2 class="text-xl font-bold mb-4">Final Bill</h2>
+    <ul class="text-left mb-4">
+      ${wizardSteps.map(step => `<li>• ${step.name}: ₹${step.price}</li>`).join('')}
+    </ul>
+    <p><strong>Total:</strong> ₹${total.toFixed(2)}</p>
+    ${discount > 0 ? `<p><strong>Discount (10%):</strong> -₹${discount.toFixed(2)}</p>` : ''}
+    <p><strong>Amount Payable:</strong> ₹${finalTotal.toFixed(2)}</p>
+  `;
+
+      document.getElementById('wizard').style.display = 'none';
+      document.getElementById('billSummary').innerHTML = summary;
+      document.getElementById('billSummary').style.display = 'block';
+    }
+
+    renderCart();
+  </script>
+</body>
+
+</html>

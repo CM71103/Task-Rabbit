@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Task Rabbit</title>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-[Inter] text-gray-800">
+
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-5 flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-green-600">Task Rabbit</h1>
+      <nav class="space-x-6">
+        <a href="login_page.html" class="text-gray-600 hover:text-green-600">Home</a>
+        <a href="AvailableServices.html" class="text-gray-600 hover:text-green-600">Services</a>
+        <a href="#" class="text-green-600 font-semibold">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <hr>
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center text-green-600 mb-4">Get in Touch</h2>
+      <p class="text-lg text-center text-gray-600 mb-10">We'd love to hear from you. Fill in the form below and we'll get back to you shortly.</p>
+
+      <form action="https://formspree.io/f/xblgqzdp" method="POST" class="space-y-6 bg-gray-50 p-8 rounded-2xl shadow-md">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="block mb-2 font-medium">Full Name</label>
+            <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+          </div>
+          <div>
+            <label class="block mb-2 font-medium">Email</label>
+            <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+          </div>
+        </div>
+        <div>
+          <label class="block mb-2 font-medium">Subject</label>
+          <input type="text" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400">
+        </div>
+        <div>
+          <label class="block mb-2 font-medium">Message</label>
+          <textarea name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-all">
+          Send Message
+        </button>
+      </form>
+
+      <p class="text-sm text-center text-gray-500 mt-4">Powered by <a href="https://formspree.io" class="text-green-500 hover:underline" target="_blank">Formspree</a></p>
+    </div>
+  </section>
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div>
+        <h2 class="text-lg font-bold">Task Rabbit</h2>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-4">Company</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">About us</a></li>
+          <li><a href="#" class="hover:underline">Terms & conditions</a></li>
+          <li><a href="#" class="hover:underline">Privacy policy</a></li>
+          <li><a href="#" class="hover:underline">Anti-discrimination policy</a></li>
+          <li><a href="#" class="hover:underline">ESG Impact</a></li>
+          <li><a href="#" class="hover:underline">Careers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-4">For customers</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">Task Rabbit</a></li>
+          <li><a href="#" class="hover:underline">Categories near you</a></li>
+          <li><a href="#" class="hover:underline">Blog</a></li>
+          <li><a href="#" class="hover:underline">Contact us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-bold mb-4">For partners</h3>
+        <a href="#" class="hover:underline">Register as a professional</a>
+        <div class="mt-6 space-x-4">
+          <a href="#"><img src="appstore.png" alt="App Store" class="inline-block" width="25" ></a>
+          <a href="#"><img src="playstore.png" alt="Google Play" class="inline-block" width="25"></a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="text-center mt-8">
+      <p>&copy; 2025 UT Services. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

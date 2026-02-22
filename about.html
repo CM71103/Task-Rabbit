@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Task Rabbit</title>
+  <link rel="website icon" type="jpg" href="taskrabbit.jpg">
+
+  <!-- Fonts + Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #f0f4f8, #ffffff);
+    }
+
+    header {
+      background-color: #1B1521;
+      color: #ffffff;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+      background-color: #1B1521;
+      display: flex;
+      justify-content: flex-end;
+      padding: 12px 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #86C232;
+    }
+
+    .section-divider {
+      width: 50%;
+      margin: 40px auto 20px;
+      height: 4px;
+      background: linear-gradient(to right, #86C232, #a0da57);
+      border-radius: 8px;
+      animation: pulse 2s infinite;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto 60px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      padding: 50px 40px;
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 1s ease-in-out both;
+    }
+
+    h2 {
+      color: #1B1521;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    p {
+      line-height: 1.8;
+      color: #333;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .highlight {
+      background: linear-gradient(to right, #86C232, #b6e764);
+      color: #1B1521;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <header>
+    About <span class="text-green-400">Task Rabbit</span>
+  </header>
+
+  <nav style="align-items: center;">
+    <a href="login_page.html" style="align-items: center;">🏠 Home</a>
+    <a href="AvailableServices.html" style="align-items: center;">🛠 Services</a>
+    <a href="cart.html" style="align-items: center;">🛒 Cart</a>
+  </nav>
+
+  <div class="section-divider"></div>
+
+  <div class="container">
+    <h2 class="text-3xl font-bold mb-4 text-green-600 text-center animate-pulse">Our Mission & Story</h2>
+
+    <p>
+      Welcome to <span class="highlight">Task Rabbit</span> – your trusted online platform for booking skilled professionals across various services. Whether you need an electrician, plumber, cleaner, or appliance repair expert, we connect you with reliable and verified service providers in your area.
+    </p>
+
+    <p>
+      Our mission is to simplify your life by making quality home services just a click away. Task Rabbit ensures <span class="highlight">safety, convenience</span>, and satisfaction with every service booked through our platform.
+    </p>
+
+    <p>
+      Inspired by trusted global platforms like Urban Company, we’ve crafted a system tailored for local needs — with a <span class="highlight">seamless interface</span>, clear pricing, trusted taskers, and fast turnarounds.
+    </p>
+
+    <p>
+      Thank you for choosing <strong>Task Rabbit</strong>. We’re committed to helping you live smarter and better — every day.
+    </p>
+  </div>
+
+</body>
+</html>
